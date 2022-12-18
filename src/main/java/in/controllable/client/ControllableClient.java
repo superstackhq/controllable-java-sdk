@@ -1,16 +1,15 @@
 package in.controllable.client;
 
 import in.controllable.caller.ControllableCaller;
-import in.controllable.model.ExecutionRequest;
-import in.controllable.model.ExecutionResponse;
-import in.controllable.model.PropertyReferenceValuePairs;
-import in.controllable.model.ReadPropertyRequests;
+import in.controllable.model.*;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ControllableClient {
@@ -19,8 +18,11 @@ public class ControllableClient {
 
     private final String appKey;
 
-    public ControllableClient(String controllableServerEndpoint, String appKey, Integer callTimeout) {
+    private final String environment;
+
+    public ControllableClient(String controllableServerEndpoint, String appKey, String environment, Integer callTimeout) {
         this.appKey = appKey;
+        this.environment = environment;
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -36,8 +38,22 @@ public class ControllableClient {
         return caller.execute(executionRequest, Map.of("Authorization", "AppKey " + appKey)).execute().body();
     }
 
-    public ExecutionResponse createPropertyValue(PropertyReferenceValuePairs propertyReferenceValuePairs) {
-        return null;
+    public ExecutionResponse createPropertyValue(PropertyReferenceValuePairs propertyReferenceValuePairs) throws IOException {
+        ExecutionRequest executionRequest = new ExecutionRequest();
+        executionRequest.setEnvironment(environment);
+        executionRequest.setOperation(Operation.CREATE_PROPERTY_VALUE);
+
+        List<PropertyExecutionRequest> requests = new ArrayList<>();
+
+        for (PropertyReferenceValuePair pair : propertyReferenceValuePairs.getPairs()) {
+            PropertyExecutionRequest propertyExecutionRequest = new PropertyExecutionRequest();
+            propertyExecutionRequest.setProperty(pair.getReference());
+            propertyExecutionRequest.setValue(pair.getValue());
+            requests.add(propertyExecutionRequest);
+        }
+
+        executionRequest.setRequests(requests);
+        return execute(executionRequest);
     }
 
     public ExecutionResponse updatePropertyValue(PropertyReferenceValuePairs propertyReferenceValuePairs) {
