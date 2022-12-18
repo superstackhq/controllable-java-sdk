@@ -92,7 +92,22 @@ public class ControllableClient {
         return execute(executionRequest);
     }
 
-    public ExecutionResponse readPropertyValue(ReadPropertyRequests readPropertyRequests) {
-        return null;
+    public ExecutionResponse readPropertyValue(ReadPropertyRequests readPropertyRequests) throws IOException {
+        ExecutionRequest executionRequest = new ExecutionRequest();
+        executionRequest.setEnvironment(environment);
+        executionRequest.setOperation(Operation.READ_PROPERTY_VALUE);
+
+        List<PropertyExecutionRequest> requests = new ArrayList<>();
+
+        for (ReadPropertyRequest readPropertyRequest : readPropertyRequests.getRequests()) {
+            PropertyExecutionRequest propertyExecutionRequest = new PropertyExecutionRequest();
+            propertyExecutionRequest.setProperty(readPropertyRequest.getReference());
+            propertyExecutionRequest.setParams(readPropertyRequest.getParams());
+            requests.add(propertyExecutionRequest);
+        }
+
+        executionRequest.setRequests(requests);
+        return execute(executionRequest);
+
     }
 }
