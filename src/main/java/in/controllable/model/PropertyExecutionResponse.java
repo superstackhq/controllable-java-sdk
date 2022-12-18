@@ -2,17 +2,17 @@ package in.controllable.model;
 
 import java.io.Serializable;
 
-public class ExecutionPropertyResponse implements Serializable {
+public class PropertyExecutionResponse implements Serializable {
 
     private Boolean success;
 
-    private Value value;
+    private PropertyValue value;
 
-    public ExecutionPropertyResponse() {
+    public PropertyExecutionResponse() {
 
     }
 
-    public ExecutionPropertyResponse(Boolean success, Value value) {
+    public PropertyExecutionResponse(Boolean success, PropertyValue value) {
         this.success = success;
         this.value = value;
     }
@@ -25,11 +25,11 @@ public class ExecutionPropertyResponse implements Serializable {
         this.success = success;
     }
 
-    public Value getValue() {
+    public PropertyValue getValue() {
         return value;
     }
 
-    public void setValue(Value value) {
+    public void setValue(PropertyValue value) {
         this.value = value;
     }
 }

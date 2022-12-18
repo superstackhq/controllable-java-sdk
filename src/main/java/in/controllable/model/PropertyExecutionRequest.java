@@ -3,19 +3,19 @@ package in.controllable.model;
 import java.io.Serializable;
 import java.util.Map;
 
-public class ExecutionPropertyRequest implements Serializable {
+public class PropertyExecutionRequest implements Serializable {
 
     private PropertyReference property;
 
-    private Value value;
+    private PropertyValue value;
 
     private Map<String, Object> params;
 
-    public ExecutionPropertyRequest() {
+    public PropertyExecutionRequest() {
 
     }
 
-    public ExecutionPropertyRequest(PropertyReference property, Value value, Map<String, Object> params) {
+    public PropertyExecutionRequest(PropertyReference property, PropertyValue value, Map<String, Object> params) {
         this.property = property;
         this.value = value;
         this.params = params;
@@ -29,11 +29,11 @@ public class ExecutionPropertyRequest implements Serializable {
         this.property = property;
     }
 
-    public Value getValue() {
+    public PropertyValue getValue() {
         return value;
     }
 
-    public void setValue(Value value) {
+    public void setValue(PropertyValue value) {
         this.value = value;
     }
 

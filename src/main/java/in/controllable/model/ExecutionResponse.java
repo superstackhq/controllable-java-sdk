@@ -5,21 +5,21 @@ import java.util.List;
 
 public class ExecutionResponse implements Serializable {
 
-    private List<ExecutionPropertyResponse> responses;
+    private List<PropertyExecutionResponse> responses;
 
     public ExecutionResponse() {
 
     }
 
-    public ExecutionResponse(List<ExecutionPropertyResponse> responses) {
+    public ExecutionResponse(List<PropertyExecutionResponse> responses) {
         this.responses = responses;
     }
 
-    public List<ExecutionPropertyResponse> getResponses() {
+    public List<PropertyExecutionResponse> getResponses() {
         return responses;
     }
 
-    public void setResponses(List<ExecutionPropertyResponse> responses) {
+    public void setResponses(List<PropertyExecutionResponse> responses) {
         this.responses = responses;
     }
 }

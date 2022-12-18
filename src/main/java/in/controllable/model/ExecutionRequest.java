@@ -9,13 +9,13 @@ public class ExecutionRequest implements Serializable {
 
     private String environment;
 
-    private List<ExecutionPropertyRequest> requests;
+    private List<PropertyExecutionRequest> requests;
 
     public ExecutionRequest() {
 
     }
 
-    public ExecutionRequest(Operation operation, String environment, List<ExecutionPropertyRequest> requests) {
+    public ExecutionRequest(Operation operation, String environment, List<PropertyExecutionRequest> requests) {
         this.operation = operation;
         this.environment = environment;
         this.requests = requests;
@@ -37,11 +37,11 @@ public class ExecutionRequest implements Serializable {
         this.environment = environment;
     }
 
-    public List<ExecutionPropertyRequest> getRequests() {
+    public List<PropertyExecutionRequest> getRequests() {
         return requests;
     }
 
-    public void setRequests(List<ExecutionPropertyRequest> requests) {
+    public void setRequests(List<PropertyExecutionRequest> requests) {
         this.requests = requests;
     }
 }

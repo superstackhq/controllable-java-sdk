@@ -2,7 +2,7 @@ package in.controllable.model;
 
 import java.io.Serializable;
 
-public class Value implements Serializable {
+public class PropertyValue implements Serializable {
 
     private String id;
 
@@ -12,17 +12,17 @@ public class Value implements Serializable {
 
     private Segment segment;
 
-    public Value() {
+    public PropertyValue() {
 
     }
 
-    public Value(Object data, Rule rule, Segment segment) {
+    public PropertyValue(Object data, Rule rule, Segment segment) {
         this.data = data;
         this.rule = rule;
         this.segment = segment;
     }
 
-    public Value(String id, Object data, Rule rule, Segment segment) {
+    public PropertyValue(String id, Object data, Rule rule, Segment segment) {
         this.id = id;
         this.data = data;
         this.rule = rule;
