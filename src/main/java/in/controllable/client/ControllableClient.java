@@ -20,7 +20,7 @@ public class ControllableClient {
 
     private final String environment;
 
-    public ControllableClient(String controllableServerEndpoint, String appKey, String environment, Integer callTimeout) {
+    public ControllableClient(String controllableServerEndpoint, String appKey, String environment, Integer callTimeoutInMS) {
         this.appKey = appKey;
         this.environment = environment;
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -28,7 +28,7 @@ public class ControllableClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(controllableServerEndpoint)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient.callTimeout(Duration.ofMillis(callTimeout)).build())
+                .client(httpClient.callTimeout(Duration.ofMillis(callTimeoutInMS)).build())
                 .build();
 
         this.caller = retrofit.create(ControllableCaller.class);

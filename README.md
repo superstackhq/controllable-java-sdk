@@ -1,3 +1,11 @@
+Controllable Java SDK
+=======================
+
+This is the Controllable Java SDK.
+
+### Usage Example
+
+```java
 package in.controllable;
 
 import in.controllable.client.ControllableClient;
@@ -37,3 +45,4 @@ public class Main {
         System.out.println(response.getResponses().get(0).getValue().getData());
     }
 }
+```
