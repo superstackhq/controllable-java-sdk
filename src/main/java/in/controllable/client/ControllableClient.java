@@ -56,12 +56,40 @@ public class ControllableClient {
         return execute(executionRequest);
     }
 
-    public ExecutionResponse updatePropertyValue(PropertyReferenceValuePairs propertyReferenceValuePairs) {
-        return null;
+    public ExecutionResponse updatePropertyValue(PropertyReferenceValuePairs propertyReferenceValuePairs) throws IOException {
+        ExecutionRequest executionRequest = new ExecutionRequest();
+        executionRequest.setEnvironment(environment);
+        executionRequest.setOperation(Operation.UPDATE_PROPERTY_VALUE);
+
+        List<PropertyExecutionRequest> requests = new ArrayList<>();
+
+        for (PropertyReferenceValuePair pair : propertyReferenceValuePairs.getPairs()) {
+            PropertyExecutionRequest propertyExecutionRequest = new PropertyExecutionRequest();
+            propertyExecutionRequest.setProperty(pair.getReference());
+            propertyExecutionRequest.setValue(pair.getValue());
+            requests.add(propertyExecutionRequest);
+        }
+
+        executionRequest.setRequests(requests);
+        return execute(executionRequest);
     }
 
-    public ExecutionResponse deletePropertyValue(PropertyReferenceValuePairs propertyReferenceValuePairs) {
-        return null;
+    public ExecutionResponse deletePropertyValue(PropertyReferenceValuePairs propertyReferenceValuePairs) throws IOException {
+        ExecutionRequest executionRequest = new ExecutionRequest();
+        executionRequest.setEnvironment(environment);
+        executionRequest.setOperation(Operation.DELETE_PROPERTY_VALUE);
+
+        List<PropertyExecutionRequest> requests = new ArrayList<>();
+
+        for (PropertyReferenceValuePair pair : propertyReferenceValuePairs.getPairs()) {
+            PropertyExecutionRequest propertyExecutionRequest = new PropertyExecutionRequest();
+            propertyExecutionRequest.setProperty(pair.getReference());
+            propertyExecutionRequest.setValue(pair.getValue());
+            requests.add(propertyExecutionRequest);
+        }
+
+        executionRequest.setRequests(requests);
+        return execute(executionRequest);
     }
 
     public ExecutionResponse readPropertyValue(ReadPropertyRequests readPropertyRequests) {
